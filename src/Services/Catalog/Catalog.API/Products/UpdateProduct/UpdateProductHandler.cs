@@ -21,7 +21,7 @@ namespace Catalog.API.Products.UpdateProduct
         public async Task<UpdateProductResult> Handle(UpdateProductCommand command, CancellationToken cancellationToken)
         {
             logger.LogInformation("UpdateProductCommand received");
-            var productToUpdate = await session.LoadAsync<Product>(command.Id, cancellationToken) ?? throw new ProductNotFoundException();
+            var productToUpdate = await session.LoadAsync<Product>(command.Id, cancellationToken) ?? throw new ProductNotFoundException(command.Id);
 
             productToUpdate.Name = command.Name;
             productToUpdate.Category = command.Category;
