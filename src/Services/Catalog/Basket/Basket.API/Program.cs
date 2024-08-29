@@ -2,7 +2,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
 
-builder.Services.AddCarter();
+builder.Services.AddCarter(configurator: c =>
+{
+    c.WithModule<GetBasketEndpoints>();
+    c.WithModule<DeleteBasketEndpoints>();
+    c.WithModule<StoreBasketEndpoints>();
+});
 
 builder.Services.AddMediatR(config =>
 {
