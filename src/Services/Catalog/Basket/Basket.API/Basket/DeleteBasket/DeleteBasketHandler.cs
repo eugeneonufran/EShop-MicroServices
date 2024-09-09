@@ -9,12 +9,13 @@
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Username should not be empty");
         }
     }
-        public class DeleteBasketHandler : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
+    public class DeleteBasketHandler(IBasketRepository repository) : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
+    {
+        public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
         {
-            public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
-            {
-                //TODO: delete
-                return new DeleteBasketResult(false);
-            }
+            await repository.DeleteBasketAsync(command.UserName, cancellationToken);
+
+            return new DeleteBasketResult(true);
         }
+    }
 }
