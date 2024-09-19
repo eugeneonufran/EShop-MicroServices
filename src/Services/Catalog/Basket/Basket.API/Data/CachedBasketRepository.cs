@@ -1,8 +1,4 @@
-﻿
-using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
-
-namespace Basket.API.Data
+﻿namespace Basket.API.Data
 {
     public class CachedBasketRepository(IBasketRepository repository, IDistributedCache cache) : IBasketRepository
     {
