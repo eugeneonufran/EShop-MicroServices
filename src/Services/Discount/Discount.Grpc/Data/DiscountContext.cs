@@ -7,10 +7,11 @@ namespace Discount.Grpc.Data
     {
         public DbSet<Coupon> Coupons { get; set; } = default!;
 
-        public DiscountContext(DbContextOptions<DiscountContext> options) : base(options)
+        public DiscountContext(DbContextOptions<DiscountContext> options)
+           : base(options)
         {
-            
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Coupon>().HasData(
