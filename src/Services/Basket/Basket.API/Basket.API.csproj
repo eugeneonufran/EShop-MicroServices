@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>c50112bc-a111-4e4c-9c3e-f9970e447f85</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\..\..</DockerfileContext>
+    <DockerfileContext>..\..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
@@ -17,6 +17,8 @@
     <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="8.0.1" />
 
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
+
+    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
 
     <PackageReference Include="Marten" Version="7.26.6" />
 
@@ -29,6 +31,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\Discount\Discount.Grpc\Protos\discount.proto" GrpcServices="Client">
+      <Link>Protos\discount.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>
