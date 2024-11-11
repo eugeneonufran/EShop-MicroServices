@@ -16,13 +16,7 @@
             private set { }
         }
 
-        public static Order Create(OrderId id,
-                                   CustomerId customerId,
-                                   OrderName orderName,
-                                   Address shippingAddress,
-                                   Address billingAddress,
-                                   Payment payment,
-                                   OrderStatus orderStatus)
+        public static Order Create(OrderId id, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment)
         {
             var order = new Order
             {
@@ -32,7 +26,7 @@
                 ShippingAddress = shippingAddress,
                 BillingAddress = billingAddress,
                 Payment = payment,
-                Status = orderStatus
+                Status = OrderStatus.Pending
             };
 
             order.AddDomainEvent(new OrderCreatedEvent(order));
@@ -40,17 +34,13 @@
             return order;
         }
 
-        public void Update(OrderName orderName,
-                           Address shippingAddress,
-                           Address billingAddress,
-                           Payment payment,
-                           OrderStatus orderStatus)
+        public void Update(OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
         {
             OrderName = orderName;
             ShippingAddress = shippingAddress;
             BillingAddress = billingAddress;
             Payment = payment;
-            Status = orderStatus;
+            Status = status;
 
             AddDomainEvent(new OrderUpdatedEvent(this));
         }
