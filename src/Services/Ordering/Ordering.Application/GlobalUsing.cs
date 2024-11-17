@@ -1,0 +1,9 @@
+﻿global using BuildingBlocks.CQRS;
+global using FluentValidation;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using Ordering.Application.Data;
+global using Ordering.Application.DTOs;
+global using Ordering.Domain.Models;
+global using Ordering.Domain.ValueObjects;
+global using System.Reflection;
