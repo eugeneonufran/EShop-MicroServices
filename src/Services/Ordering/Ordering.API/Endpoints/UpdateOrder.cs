@@ -1,7 +1,4 @@
-﻿
-using Ordering.Application.Orders.Commands.UpdateOrder;
-
-namespace Ordering.API.Endpoints;
+﻿namespace Ordering.API.Endpoints;
 
 public record UpdateOrderRequest(OrderDTO Order);
 
