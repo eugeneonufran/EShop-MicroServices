@@ -11,6 +11,7 @@
 
         public static WebApplication UseApiServices(this WebApplication webApplication)
         {
+            webApplication.MapCarter();
             return webApplication;
         }
     }
