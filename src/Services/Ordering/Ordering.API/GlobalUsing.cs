@@ -6,5 +6,6 @@ global using Ordering.Application.DTOs;
 global using Ordering.Application.Orders.Commands.CreateOrder;
 global using Ordering.Application.Orders.Commands.DeleteOrder;
 global using Ordering.Application.Orders.Commands.UpdateOrder;
+global using Ordering.Application.Orders.Queries.GetOrders;
 global using Ordering.Application.Orders.Queries.GetOrdersByCustomer;
 global using Ordering.Application.Orders.Queries.GetOrdersByName;
