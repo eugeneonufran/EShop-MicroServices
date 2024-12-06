@@ -11,6 +11,7 @@
                 cfg.AddOpenBehavior(typeof(ValidationBehaviour<,>));
             });
 
+            services.AddFeatureManagement();
             services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
 
             return services;
