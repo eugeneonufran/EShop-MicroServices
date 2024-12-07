@@ -1,7 +1,8 @@
 ﻿namespace Basket.API.Basket.CheckoutBasket;
 
-public record CheckoutBasketRequest(BasketCheckoutDTO BasketCheckoutDTO);
-public record CheckputBasketResponse(bool IsSuccess);
+public record CheckoutBasketRequest(BasketCheckoutDTO BasketCheckoutDto);
+public record CheckoutBasketResponse(bool IsSuccess);
+
 public class CheckoutBasketEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
@@ -12,9 +13,14 @@ public class CheckoutBasketEndpoints : ICarterModule
 
             var result = await sender.Send(command);
 
-            var response = result.Adapt<CheckputBasketResponse>();
+            var response = result.Adapt<CheckoutBasketResponse>();
 
             return Results.Ok(response);
-        });
+        })
+        .WithName("CheckoutBasket")
+        .Produces<CheckoutBasketResponse>(StatusCodes.Status201Created)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Checkout Basket")
+        .WithDescription("Checkout Basket");
     }
 }

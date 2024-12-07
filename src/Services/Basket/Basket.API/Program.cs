@@ -1,3 +1,5 @@
+using Basket.API.Basket.CheckoutBasket;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
@@ -8,6 +10,7 @@ builder.Services.AddCarter(configurator: c =>
     c.WithModule<GetBasketEndpoints>();
     c.WithModule<DeleteBasketEndpoints>();
     c.WithModule<StoreBasketEndpoints>();
+    c.WithModule<CheckoutBasketEndpoints>();
 });
 
 builder.Services.AddMediatR(config =>
