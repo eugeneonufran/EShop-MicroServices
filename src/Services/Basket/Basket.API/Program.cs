@@ -1,5 +1,4 @@
-using Discount.Grpc;
-using HealthChecks.UI.Client;
+using Basket.API.Basket.CheckoutBasket;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +10,7 @@ builder.Services.AddCarter(configurator: c =>
     c.WithModule<GetBasketEndpoints>();
     c.WithModule<DeleteBasketEndpoints>();
     c.WithModule<StoreBasketEndpoints>();
+    c.WithModule<CheckoutBasketEndpoints>();
 });
 
 builder.Services.AddMediatR(config =>
@@ -24,7 +24,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
-    opts.Schema.For<ShoppingCart>().Identity(x=>x.UserName);
+    opts.Schema.For<ShoppingCart>().Identity(x => x.UserName);
 
 }).UseLightweightSessions();
 
@@ -54,6 +54,10 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     return handler;
 });
 
+//async communication services
+builder.Services.AddMessageBroker(builder.Configuration);
+
+//cross-cuting services
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
