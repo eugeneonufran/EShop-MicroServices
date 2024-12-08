@@ -1,22 +1,27 @@
-namespace Shopping.Web.Pages;
-
-public class CartModel(IBasketService basketService, ILogger<CartModel> logger) : PageModel
+namespace Shopping.Web.Pages
 {
-    public ShoppingCartModel Cart {  get; set; }= new ShoppingCartModel();
-    public async Task<IActionResult> OnGetAsync()
+    public class CartModel(IBasketService basketService, ILogger<CartModel> logger)
+        : PageModel
     {
-        Cart = await basketService.LoadUserBasket();
-        return Page();
-    }
+        public ShoppingCartModel Cart { get; set; } = new ShoppingCartModel();
 
-    public async Task<IActionResult> OnPostRemoveToCartAsync(Guid productId)
-    {
-        Cart = await basketService.LoadUserBasket();
+        public async Task<IActionResult> OnGetAsync()
+        {
+            Cart = await basketService.LoadUserBasket();
 
-        Cart.Items.RemoveAll(x=>x.ProductId==productId);
+            return Page();
+        }
 
-        await basketService.StoreBasket(new StoreBasketRequest(Cart));
+        public async Task<IActionResult> OnPostRemoveToCartAsync(Guid productId)
+        {
+            logger.LogInformation("Remove to cart button clicked");
+            Cart = await basketService.LoadUserBasket();
 
-        return Page();
+            Cart.Items.RemoveAll(x => x.ProductId == productId);
+
+            await basketService.StoreBasket(new StoreBasketRequest(Cart));
+
+            return RedirectToPage();
+        }
     }
 }

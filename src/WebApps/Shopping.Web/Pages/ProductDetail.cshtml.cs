@@ -1,43 +1,44 @@
-namespace Shopping.Web.Pages;
-
-public class ProductDetailModel(ICatalogService catalogService,
-                                IBasketService basketService,
-                                ILogger<ProductDetailModel> logger) : PageModel
+namespace Shopping.Web.Pages
 {
-    public ProductModel Product { get; set; } = default!;
-
-    [BindProperty]
-    public string Color { get; set; } = default!;
-
-    [BindProperty]
-    public int Quantity { get; set; } = default!;
-
-    public async Task<IActionResult> OnGetAsync(Guid productId)
+    public class ProductDetailModel
+        (ICatalogService catalogService, IBasketService basketService, ILogger<ProductDetailModel> logger)
+        : PageModel
     {
-        var response = await catalogService.GetProduct(productId);
-        Product = response.Product;
+        public ProductModel Product { get; set; } = default!;
 
-        return Page();
-    }
+        [BindProperty]
+        public string Color { get; set; } = default!;
 
-    public async Task<IActionResult> OnPostAddToCartAsync(Guid productId)
-    {
-        logger.LogInformation("Add to cart button clicked");
-        var productResponse = await catalogService.GetProduct(productId);
+        [BindProperty]
+        public int Quantity { get; set; } = default!;
 
-        var basket = await basketService.LoadUserBasket();
-
-        basket.Items.Add(new ShoppingCartItemModel
+        public async Task<IActionResult> OnGetAsync(Guid productId)
         {
-            ProductId = productId,
-            ProductName = productResponse.Product.Name,
-            Price = productResponse.Product.Price,
-            Quantity = Quantity,
-            Color = Color
-        });
+            var response = await catalogService.GetProduct(productId);
+            Product = response.Product;
 
-        await basketService.StoreBasket(new StoreBasketRequest(basket));
+            return Page();
+        }
 
-        return RedirectToPage("Cart");
+        public async Task<IActionResult> OnPostAddToCartAsync(Guid productId)
+        {
+            logger.LogInformation("Add to cart button clicked");
+            var productResponse = await catalogService.GetProduct(productId);
+
+            var basket = await basketService.LoadUserBasket();
+
+            basket.Items.Add(new ShoppingCartItemModel
+            {
+                ProductId = productId,
+                ProductName = productResponse.Product.Name,
+                Price = productResponse.Product.Price,
+                Quantity = Quantity,
+                Color = Color
+            });
+
+            await basketService.StoreBasket(new StoreBasketRequest(basket));
+
+            return RedirectToPage("Cart");
+        }
     }
 }

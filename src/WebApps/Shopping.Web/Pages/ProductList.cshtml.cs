@@ -1,9 +1,8 @@
 namespace Shopping.Web.Pages
 {
-    public class ProductListModel(
-        ICatalogService catalogService, 
-        IBasketService basketService, 
-        ILogger<ProductListModel> logger) : PageModel
+    public class ProductListModel
+        (ICatalogService catalogService, IBasketService basketService, ILogger<ProductListModel> logger)
+        : PageModel
     {
         public IEnumerable<string> CategoryList { get; set; } = [];
         public IEnumerable<ProductModel> ProductList { get; set; } = [];
@@ -15,11 +14,11 @@ namespace Shopping.Web.Pages
         {
             var response = await catalogService.GetProducts();
 
-            CategoryList = response.Products.SelectMany(x => x.Category).Distinct();
+            CategoryList = response.Products.SelectMany(p => p.Category).Distinct();
 
             if (!string.IsNullOrWhiteSpace(categoryName))
             {
-                ProductList = response.Products.Where(p=>p.Category.Contains(categoryName));
+                ProductList = response.Products.Where(p => p.Category.Contains(categoryName));
                 SelectedCategory = categoryName;
             }
             else
