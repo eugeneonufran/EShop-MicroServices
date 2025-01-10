@@ -20,10 +20,10 @@ internal class InitialData
     {
         get
         {
-            var address1 = Address.Of("mehmet", "ozkaya", "mehmet@gmail.com", "Bahcelievler No:4", "Turkey", "Istanbul", "38050");
+            var address1 = Address.Of("eugene", "onufran", "eugene@gmail.com", "Bahcelievler No:4", "Turkey", "Istanbul", "38050");
             var address2 = Address.Of("john", "doe", "john@gmail.com", "Broadway No:1", "England", "Nottingham", "08050");
 
-            var payment1 = Payment.Of("mehmet", "5555555555554444", "12/28", "355", 1);
+            var payment1 = Payment.Of("eugene", "5555555555554444", "12/28", "355", 1);
             var payment2 = Payment.Of("john", "8885555555554444", "06/30", "222", 2);
 
             var order1 = Order.Create(
