@@ -36,22 +36,24 @@ The project relies on several supporting services to provide essential infrastru
 - **Redis**: Serves as a distributed cache for the Basket service to enhance performance and scalability.
 - **RabbitMQ**: Acts as the message broker, enabling asynchronous communication between microservices.
 - **SQL Server**: Used as the database for the Ordering service.
+- **SQLite**: Lightweight database.
 - **YARP API Gateway**: A reverse proxy that acts as a single entry point for the microservices, handling routing and load balancing.
 
 ## Key Technologies and Patterns
 
 The project leverages a range of modern technologies and architectural patterns:
 
-### Technologies
-- **.NET Core**: Backend framework for building microservices.
-- **Docker**: For containerizing services and ensuring consistent runtime environments.
-- **RabbitMQ**: Message broker for asynchronous communication.
-- **MassTransit**: Abstraction layer over RabbitMQ for easier message-based communication.
-- **Marten**: Document database and event store.
-- **Entity Framework Core**: ORM for data persistence.
-- **MediatR**: Implements the mediator pattern for decoupling requests from handlers.
-- **Carter**: Minimal API framework.
-- **Postman**: For manual API testing (with provided collection).
+### Core
+Technologies, frameworks, and patterns that are essential to the project and directly impact the core architecture and functionality:
+
+- **C# and .NET Core**: Core language and framework for all services.
+- **Docker**: Containerization of services for easy deployment and scaling.
+- **RabbitMQ**: Message broker for asynchronous communication between microservices.
+- **gRPC**: High-performance communication between microservices.
+- **MassTransit**: Library for message-based communication in distributed systems.
+- **Marten**: Document database and event store for persisting data.
+- **Entity Framework Core**: ORM for data access in services requiring relational data.
+- **MediatR**: Implements the mediator pattern to reduce coupling between components.
 
 ### Architectural Patterns
 - **Microservices Architecture**: Each service is independently deployable and handles a specific business capability.
@@ -59,6 +61,18 @@ The project leverages a range of modern technologies and architectural patterns:
 - **CQRS**: Command Query Responsibility Segregation is used to separate read and write operations.
 - **Event-Driven Communication**: Services communicate via events to achieve eventual consistency.
 - **API Gateway Pattern**: Provides a single entry point for clients and handles routing to the appropriate microservice.
+
+### External Enhancements
+Libraries and frameworks used to enhance functionality, improve developer experience, or handle specific concerns:
+
+- **HealthChecks**: For monitoring service health and dependencies.
+- **Custom Exception Handling System**: Centralized error handling for consistent responses.
+- **FluentValidation**: Strongly-typed validation rules.
+- **Mapster**: Fast object mapping for DTO and entity transformations.
+- **FeatureManagement**: Feature flag support for managing feature rollouts.
+- **Scrutor**: Assembly scanning and DI registration.
+- **Carter**: Minimal API framework for lightweight HTTP services.
+- **Postman**: Manual API testing with provided collections.
 
 ## How to Run the Project
 
