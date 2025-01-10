@@ -23,6 +23,9 @@ The solution is organized into several key components:
    - **Discount**: Manages discount rules and coupon codes.
    - **Ordering**: Handles order creation, processing, and management.
 
+### 3. **WebApps**
+   This folder contains web applications that provide front-end functionality for the e-commerce platform.
+
 ### 4. **Docker Configuration**
    The project includes multiple Docker configuration files for running the application in a containerized environment:
    - **docker-compose.yml**: Main Docker Compose file for orchestrating services.
