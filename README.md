@@ -93,11 +93,18 @@ Libraries and frameworks used to enhance functionality, improve developer experi
    ```bash
    docker-compose up --build
    ```
-3. The services will be available at the following URLs (assuming default configuration):
+3. Service Endpoints (Default Configuration):
+   #### Standard Endpoints (Default Configuration):
    - **API Gateway**: http://localhost:5000
    - **Basket Service**: http://localhost:5001
    - **Catalog Service**: http://localhost:5002
    - **Ordering Service**: http://localhost:5003
+
+   #### Endpoints with YARP (Reverse Proxy):
+   - **API Gateway Base URL**: http://localhost:6064
+   - **Basket Service**: http://localhost:6064/basket-service/
+   - **Catalog Service**: http://localhost:6064/catalog-service/
+   - **Ordering Service**: http://localhost:6064/ordering-service/
 
 4. The databases will be seeded automatically during startup, so you don't need to perform any manual data setup.
 
